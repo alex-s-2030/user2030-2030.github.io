@@ -1,4 +1,4 @@
-import { Route, Router, Switch } from "wouter";
+import { Route, Router, Switch, useLocation } from "wouter";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { Overview } from "@/pages/Overview";
@@ -8,6 +8,7 @@ import { Insights } from "@/pages/Insights";
 import { Toaster } from "@/components/ui/sonner";
 import { ErrorBoundary } from "@/components/ui/error-boundary";
 import { motion, AnimatePresence } from "framer-motion";
+import { useEffect } from "react";
 
 const pageVariants = {
   initial: { opacity: 0, y: 20 },
@@ -21,13 +22,22 @@ const pageTransition = {
   duration: 0.3
 };
 
-function App() {
+function AppContent() {
+  const [, setLocation] = useLocation();
+
+  useEffect(() => {
+    // Handle GitHub Pages SPA redirect
+    const redirect = sessionStorage.getItem('redirect');
+    if (redirect) {
+      sessionStorage.removeItem('redirect');
+      setLocation(redirect);
+    }
+  }, [setLocation]);
+
   return (
-    <ErrorBoundary>
-      <Router base="/">
-        <div className="min-h-screen bg-background flex flex-col">
-          <Navigation />
-          <main className="flex-1">
+    <div className="min-h-screen bg-background flex flex-col">
+      <Navigation />
+      <main className="flex-1">
             <AnimatePresence mode="wait">
               <Switch>
                 <Route path="/">
@@ -109,6 +119,14 @@ function App() {
           <Footer />
           <Toaster />
         </div>
+  );
+}
+
+function App() {
+  return (
+    <ErrorBoundary>
+      <Router base="/">
+        <AppContent />
       </Router>
     </ErrorBoundary>
   );
