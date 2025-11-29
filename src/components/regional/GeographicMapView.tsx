@@ -5,7 +5,7 @@ import { formatNumber } from '@/utils/dataUtils';
 import { COUNTRY_COORDINATES } from '@/utils/countryCoordinates';
 import { getCountryColor } from '@/utils/countryColors';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-import westernMap from '@/assets/images/western-outline-map.png';
+import westernMap from '@/assets/images/western-countries-map.png';
 
 interface GeographicMapViewProps {
   data: MortalityData[];
@@ -74,10 +74,10 @@ export function GeographicMapView({ data, year, metric, onCountryClick }: Geogra
       <CardContent>
         <div className="relative w-full rounded-lg overflow-hidden border border-border bg-background">
           {/* Western countries map - North America and Europe only */}
-          <img 
-            src={westernMap} 
+          <img
+            src={westernMap}
             alt="Map - Western Countries (North America and Europe)"
-            className="absolute opacity-40 dark:opacity-25"
+            className="absolute opacity-30 dark:opacity-20"
             style={{
               width: '100%',
               height: '100%',
@@ -106,52 +106,64 @@ export function GeographicMapView({ data, year, metric, onCountryClick }: Geogra
                   <Tooltip key={country.countryCode}>
                     <TooltipTrigger asChild>
                       <g
-                        className="cursor-pointer transition-transform hover:scale-125"
+                        className="cursor-pointer transition-all duration-300 hover:scale-110"
                         onClick={() => onCountryClick?.(country.countryCode)}
+                        style={{
+                          transformOrigin: `${country.coords.x}px ${country.coords.y}px`
+                        }}
                       >
+                        {/* Outer glow */}
                         <circle
                           cx={country.coords.x}
                           cy={country.coords.y}
-                          r={radius + 6}
+                          r={radius + 8}
                           fill={color}
-                          opacity="0.15"
+                          opacity="0.1"
+                          className="transition-opacity hover:opacity-30"
                         />
+                        {/* Ring */}
                         <circle
                           cx={country.coords.x}
                           cy={country.coords.y}
-                          r={radius + 3}
+                          r={radius + 4}
                           fill="none"
                           stroke={color}
                           strokeWidth="2"
-                          opacity="0.4"
+                          opacity="0.5"
+                          className="transition-all hover:opacity-80 hover:stroke-width-3"
                         />
+                        {/* Main circle */}
                         <circle
                           cx={country.coords.x}
                           cy={country.coords.y}
                           r={radius}
                           fill={color}
                           opacity={opacity}
-                          stroke="white"
-                          strokeWidth="2"
+                          stroke="hsl(var(--background))"
+                          strokeWidth="2.5"
+                          className="transition-all hover:opacity-100"
                           style={{
-                            filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.3))'
+                            filter: 'drop-shadow(0 3px 6px rgba(0,0,0,0.4))'
                           }}
                         />
+                        {/* Highlight */}
                         <circle
                           cx={country.coords.x}
                           cy={country.coords.y}
-                          r={radius * 0.3}
+                          r={radius * 0.35}
                           fill="white"
-                          opacity="0.8"
+                          opacity="0.7"
+                          className="pointer-events-none"
                         />
                       </g>
                     </TooltipTrigger>
                     <TooltipContent>
                       <div className="text-sm">
-                        <p className="font-semibold">{country.country}</p>
+                        <p className="font-semibold text-popover-foreground">{country.country}</p>
                         <p className="text-muted-foreground">
                           {config.formatter(country.value)}
                         </p>
+                        <p className="text-xs text-muted-foreground mt-1">Click for details</p>
                       </div>
                     </TooltipContent>
                   </Tooltip>
