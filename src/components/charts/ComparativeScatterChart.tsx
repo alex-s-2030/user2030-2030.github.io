@@ -63,33 +63,37 @@ export function ComparativeScatterChart({ data, year }: ComparativeScatterChartP
         <ResponsiveContainer width="100%" height={400}>
           <ScatterChart margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
-            <XAxis 
-              type="number" 
-              dataKey="x" 
+            <XAxis
+              type="number"
+              dataKey="x"
               name="Healthcare Spending"
-              stroke="hsl(var(--foreground))"
-              tick={{ fill: 'hsl(var(--foreground))' }}
-              label={{ 
-                value: 'Healthcare Spending per Capita (USD)', 
-                position: 'insideBottom', 
+              stroke="hsl(var(--muted-foreground))"
+              tick={{ fill: 'hsl(var(--muted-foreground))' }}
+              label={{
+                value: 'Healthcare Spending per Capita (USD)',
+                position: 'insideBottom',
                 offset: -10,
-                fill: 'hsl(var(--foreground))'
+                fill: 'hsl(var(--muted-foreground))',
+                style: { fontSize: '12px' }
               }}
               tickFormatter={(value) => `$${value / 1000}k`}
+              style={{ fontSize: '12px' }}
             />
-            <YAxis 
-              type="number" 
-              dataKey="y" 
+            <YAxis
+              type="number"
+              dataKey="y"
               name="Life Expectancy"
-              stroke="hsl(var(--foreground))"
-              tick={{ fill: 'hsl(var(--foreground))' }}
-              label={{ 
-                value: 'Life Expectancy (Years)', 
-                angle: -90, 
+              stroke="hsl(var(--muted-foreground))"
+              tick={{ fill: 'hsl(var(--muted-foreground))' }}
+              label={{
+                value: 'Life Expectancy (Years)',
+                angle: -90,
                 position: 'insideLeft',
-                fill: 'hsl(var(--foreground))'
+                fill: 'hsl(var(--muted-foreground))',
+                style: { fontSize: '12px' }
               }}
               domain={[72, 85]}
+              style={{ fontSize: '12px' }}
             />
             <ZAxis type="number" dataKey="z" range={[50, 400]} />
             <Tooltip content={<CustomTooltip />} />

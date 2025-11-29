@@ -2,14 +2,16 @@ import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react-swc";
 import { resolve } from 'path';
 import { defineConfig } from "vite";
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 
-const projectRoot = process.env.PROJECT_ROOT || import.meta.dirname
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 // https://vite.dev/config/
 export default defineConfig({
   // This tells Vite the site will live at:
-  // https://alex-s-2030.github.io/user2030-2030.github.io/
-  base: '/user2030-2030.github.io/',
+  // https://alex-s-2030.github.io/
+  base: '/',
 
   plugins: [react(), tailwindcss()],
   build: {
@@ -19,7 +21,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      '@': resolve(projectRoot, 'src'),
+      '@': resolve(__dirname, 'src'),
     },
   },
 });

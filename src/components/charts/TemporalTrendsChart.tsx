@@ -64,15 +64,16 @@ export function TemporalTrendsChart({ data, selectedCountries, metric }: Tempora
         <ResponsiveContainer width="100%" height={400}>
           <LineChart data={chartData} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
-            <XAxis 
-              dataKey="year" 
-              stroke="hsl(var(--foreground))"
-              tick={{ fill: 'hsl(var(--foreground))' }}
+            <XAxis
+              dataKey="year"
+              stroke="hsl(var(--muted-foreground))"
+              tick={{ fill: 'hsl(var(--muted-foreground))' }}
+              style={{ fontSize: '12px' }}
             />
-            <YAxis 
-              stroke="hsl(var(--foreground))"
-              tick={{ fill: 'hsl(var(--foreground))' }}
-              label={{ value: yAxisLabel, angle: -90, position: 'insideLeft', fill: 'hsl(var(--foreground))' }}
+            <YAxis
+              stroke="hsl(var(--muted-foreground))"
+              tick={{ fill: 'hsl(var(--muted-foreground))' }}
+              label={{ value: yAxisLabel, angle: -90, position: 'insideLeft', fill: 'hsl(var(--muted-foreground))', style: { fontSize: '12px' } }}
             />
             <Tooltip 
               contentStyle={{ 

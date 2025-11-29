@@ -69,21 +69,23 @@ export function LifeExpectancyVisualization({ data, selectedCountries }: LifeExp
 
     const commonAxisProps = {
       xAxis: (
-        <XAxis 
-          dataKey="year" 
-          stroke="hsl(var(--foreground))"
-          tick={{ fill: 'hsl(var(--foreground))' }}
+        <XAxis
+          dataKey="year"
+          stroke="hsl(var(--muted-foreground))"
+          tick={{ fill: 'hsl(var(--muted-foreground))' }}
+          style={{ fontSize: '12px' }}
         />
       ),
       yAxis: (
-        <YAxis 
-          stroke="hsl(var(--foreground))"
-          tick={{ fill: 'hsl(var(--foreground))' }}
-          label={{ 
-            value: 'Life Expectancy (Years)', 
-            angle: -90, 
+        <YAxis
+          stroke="hsl(var(--muted-foreground))"
+          tick={{ fill: 'hsl(var(--muted-foreground))' }}
+          label={{
+            value: 'Life Expectancy (Years)',
+            angle: -90,
             position: 'insideLeft',
-            fill: 'hsl(var(--foreground))'
+            fill: 'hsl(var(--muted-foreground))',
+            style: { fontSize: '12px' }
           }}
           domain={[70, 85]}
         />

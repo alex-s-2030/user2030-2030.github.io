@@ -100,35 +100,37 @@ export function CountryComparisonChart({ data, year, metric, selectedCountries }
       </CardHeader>
       <CardContent>
         <ResponsiveContainer width="100%" height={400}>
-          <BarChart 
-            data={chartData} 
+          <BarChart
+            data={chartData}
             margin={{ top: 5, right: 30, left: 20, bottom: 60 }}
             layout="horizontal"
           >
             <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
-            <XAxis 
-              dataKey="country" 
-              stroke="hsl(var(--foreground))"
-              tick={{ fill: 'hsl(var(--foreground))', fontSize: 12 }}
+            <XAxis
+              dataKey="country"
+              stroke="hsl(var(--muted-foreground))"
+              tick={{ fill: 'hsl(var(--muted-foreground))', fontSize: 12 }}
               angle={0}
               textAnchor="middle"
               height={60}
             />
-            <YAxis 
-              stroke="hsl(var(--foreground))"
-              tick={{ fill: 'hsl(var(--foreground))' }}
+            <YAxis
+              stroke="hsl(var(--muted-foreground))"
+              tick={{ fill: 'hsl(var(--muted-foreground))' }}
               tickFormatter={(value) => {
                 if (metric === 'healthcareSpendingPerCapita') {
                   return `$${value / 1000}k`;
                 }
                 return formatNumber(value, 0);
               }}
-              label={{ 
-                value: config.yAxisLabel, 
-                angle: -90, 
+              label={{
+                value: config.yAxisLabel,
+                angle: -90,
                 position: 'insideLeft',
-                fill: 'hsl(var(--foreground))'
+                fill: 'hsl(var(--muted-foreground))',
+                style: { fontSize: '12px' }
               }}
+              style={{ fontSize: '12px' }}
             />
             <Tooltip content={<CustomTooltip />} />
             <Bar dataKey="value" radius={[8, 8, 0, 0]}>
